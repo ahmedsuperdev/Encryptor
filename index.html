@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Encryptor</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2 class="page-title">Text Encryptor</h2>
+    <div class="container">
+
+      <label for="inputText">Input Data</label>
+      <textarea class="writable-textarea" id="inputText" placeholder="Paste your text or encrypted string here..." autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" spellcheck="false"></textarea>
+
+      <label for="encryptionMethod">Encryption Algorithm</label>
+      <div class="toggle-wrapper">
+        <input type="checkbox" id="showLowSec" onchange="populateMethods()" />
+        <label for="showLowSec">Enable low encryption methods (For fun!)</label>
+      </div>
+      <select id="encryptionMethod"></select>
+      
+
+      <label for="cipherKey">Encryption Key <span class="optional-text">(Optional)</span></label>
+      <div class="password-wrapper">
+        <input type="password" id="cipherKey" placeholder="Leave blank to use default key" autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" spellcheck="false" />
+
+        <button type="button" class="toggle-btn" id="toggleBtn" onclick="togglePassword()" title="Toggle Visibility">
+          <svg viewBox="0 0 24 24">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
+      </div>
+
+      <div class="checkbox-container"></div>
+      <div id="charsetWrapper" style="display: none; flex-direction: column; gap: 8px; margin-bottom: 15px;">
+        <label for="charsetInput">UniversalShift Character Set</label>
+        <textarea class="writable-textarea" id="charsetInput" autocomplete="off" spellcheck="false" rows="3" title="Modify the base characters. Duplicates are ignored."></textarea>
+      </div>
+
+      <div id="passwordFeedback" class="password-feedback"></div>
+
+      <div class="button-group">
+        <button class="action-btn encrypt-btn" onclick="encryptData()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Encrypt
+        </button>
+        <button class="action-btn decrypt-btn" onclick="decryptData()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
+          Decrypt
+        </button>
+      </div>
+
+      <label for="outputText">Result</label>
+      <textarea id="outputText" readonly placeholder="Output will appear here..."></textarea>
+
+      <div id="message"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="examples.js"></script>
+  </body>
+</html>
