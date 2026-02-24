@@ -43,4 +43,4 @@ UniversalShift is a custom, low-security cipher included for fun. It works by co
 
 ## 📄 License
 
-This project is open-source and available for educational and personal use.
+This project is open-source, Use it for whatever you like 😎, but keep it legal..
